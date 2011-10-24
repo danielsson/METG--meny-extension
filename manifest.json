@@ -1,0 +1,15 @@
+{
+  "name": "Meny",
+  "version": "5.0",
+  "description": "",
+  "update_url": "http://dl.dropbox.com/u/1021696/ext.xml",
+  "browser_action": {
+    "default_icon": "cake.png",
+    "popup": "popup.htm"
+  },
+  "icons": { "128": "bigcake.png"},	
+  "permissions": [
+    "http://*/",
+    "tts"
+  ]
+}

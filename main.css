@@ -1,0 +1,95 @@
+@encoding UTF-8
+
+* { border:0;margin:0;padding: 0;}
+
+body {
+	width: 300px;
+	background: url(dark_mosaic.png) #000 repeat;
+	-webkit-box-shadow: 0 0 20px #000 inset;
+	font-family: sans-serif;
+	font-size:13px;
+	color:#FFF;
+}
+
+.left {float: left;}
+.right {float: right;}
+.clear{clear: both;}
+
+/* TYPOGRAPHY */
+
+h1 {
+	font-size: 22px;
+	font-weight: bold;
+	text-shadow: 0 0 10px #0ff;
+}
+#optionbtn {
+	cursor: pointer;
+}
+/* HEADER */
+
+#header {
+	padding: 20px;
+	background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgba(0,255,255,0.4)),
+    color-stop(0.22, rgba(0,0,0,0))
+	);
+	border-bottom: 1px solid #0FF;
+}
+
+/* MAIN */
+#main ul {overflow: hidden}
+#main ul li {
+	display: block;
+	background-color: rgba(0,0,0,0.3);
+	border-bottom: thin solid #000;
+	border-top: thin solid #222;
+}
+li p  {
+	padding: 20px;
+	width: 220px;
+}
+li em {
+	cursor:pointer;
+	float: right;
+	-webkit-transform: rotate(90deg); 
+	text-align: center;
+	border-bottom: thin solid #222;
+	border-top: 1px solid transparent;
+	margin:10px -11px;
+	padding: 10px 6px;
+	-webkit-transition: all .25s linear;
+	color: #333;
+}
+li em:hover {
+	background-image: -webkit-gradient(
+    linear,
+    right top,
+    right bottom,
+    color-stop(0, rgba(0,255,255,0.4)),
+    color-stop(1, rgba(0,0,0,0))
+	);
+	border-top-color: #0FF;
+	color: #FFF;
+}
+
+/* FOOTER */
+#footer {
+	padding: 20px;
+	background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, rgba(0,255,255,0.4)),
+    color-stop(0.22, rgba(0,0,0,0))
+	);
+	border-top: 1px solid #0FF;
+	color: #AAA;
+}
+
+#loader {
+	background: url(ajax-loader.gif) center center no-repeat;
+	height: 40px;
+}
