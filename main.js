@@ -5,7 +5,7 @@ var 	DELIMITER = "|Z|",
 
 var DishRowBuilder = function() { // Kind of an overdo
 	var pre = '<li><p class="left">',
-	post = '</p> <em>SHARE</em><div class="clear"/></li>\n',
+	post = '</p> <em><span>SHARE<span></em><div class="clear"/></li>\n',
 	temp = "", x = 0;
 
 	this.add = function(dishes) {
@@ -60,18 +60,18 @@ var TTSEngine = new function() {
 		if(!ttsAvailable) {
 			return fail();
 		}
-		this.speak(lines.thisis + r.getName());
+		this.speak(this.lines.thisis + r.getName());
 		
 		var d = r.getDishes();
 		for (var i in d){
 		  this.speak(d[i].name);
 		};
-		this.speak(lines.thashit);
+		this.speak(this.lines.thashit);
 		
 	}
 	
 	function fail() {
-		alert('yo\' browser dont supoport lolz');
+		alert('yo\' browser dont supoport tts');
 		return 1;
 	}
 }
@@ -100,8 +100,9 @@ var PopUp = function(r) {
 		if(pu.current === pu.restaurants.length) {
 			pu.current = 0;
 		}
-		pu.setStatus(pu.restaurants[pu.current].getName());
+		
 		pu.setup(pu.current);
+		_gaq.push(['_trackEvent', 'restaurant: ' + pu.current, 'clicked']);
 	});
 	
 	this.elements.header.click(function(e) {
@@ -135,12 +136,15 @@ var PopUp = function(r) {
 			console.log('R was ' + r);
 			this.current = r;
 		}
+		
+		this.setStatus(this.restaurants[this.current].getName());
 		if(localStorage.timestamp==undefined) {localStorage.timestamp = 1;}
 
 		if((new Date().getTime() - parseInt(localStorage.timestamp)) < 360000) { // Use cache
 			for(var x in this.restaurants) {
 				this.restaurants[x].restore();
 			}
+			localStorage.current = this.current;
 			this.setDishes(this.restaurants[this.current].getDishes());
 		} else { // get from the interwebz
 			

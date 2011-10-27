@@ -46,6 +46,7 @@ h1 {
 	background-color: rgba(0,0,0,0.3);
 	border-bottom: thin solid #000;
 	border-top: thin solid #222;
+	position: relative;
 }
 li p  {
 	padding: 20px;
@@ -53,37 +54,38 @@ li p  {
 }
 li em {
 	cursor:pointer;
-	float: right;
-	-webkit-transform: rotate(90deg); 
-	text-align: center;
-	border-bottom: thin solid #222;
-	border-top: 1px solid transparent;
-	margin:10px -11px;
-	padding: 10px 6px;
-	-webkit-transition: all .25s linear;
-	color: #333;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 30px;
+	border-left: 1px solid #222;
+	display: none; /* MOHAHA */
 }
 li em:hover {
 	background-image: -webkit-gradient(
     linear,
     right top,
-    right bottom,
+    left top,
     color-stop(0, rgba(0,255,255,0.4)),
     color-stop(1, rgba(0,0,0,0))
 	);
-	border-top-color: #0FF;
-	color: #FFF;
+}
+li>em>span {
+	-webkit-transform: rotate(90deg);
+	display: block;
+	margin-left: 20px;
 }
 
 /* FOOTER */
 #footer {
 	padding: 20px;
 	background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, rgba(0,255,255,0.4)),
-    color-stop(0.22, rgba(0,0,0,0))
+    	linear,
+    	left top,
+    	left bottom,
+    	color-stop(0, rgba(0,255,255,0.4)),
+    	color-stop(0.22, rgba(0,0,0,0))
 	);
 	border-top: 1px solid #0FF;
 	color: #AAA;
