@@ -30,11 +30,11 @@ h1 {
 #header {
 	padding: 20px;
 	background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, rgba(0,255,255,0.4)),
-    color-stop(0.22, rgba(0,0,0,0))
+   		linear,
+    	left bottom,
+    	left top,
+    	color-stop(0, rgba(0,255,255,0.4)),
+    	color-stop(0.22, rgba(0,0,0,0))
 	);
 	border-bottom: 1px solid #0FF;
 }
@@ -42,10 +42,10 @@ h1 {
 /* MAIN */
 #main ul {overflow: hidden}
 #main ul li {
-	display: block;
 	background-color: rgba(0,0,0,0.3);
 	border-bottom: thin solid #000;
 	border-top: thin solid #222;
+	display: block;
 	position: relative;
 }
 li p  {

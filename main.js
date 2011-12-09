@@ -1,7 +1,7 @@
 "use strict";
 var 	DELIMITER = "|Z|",
 		TIMESTAMP = "timestamp",
-		remspc = RegExp(/[ ]{2,}/ig);
+		remspc = RegExp(/[ ]{2,}|[¤]/ig);
 
 var DishRowBuilder = function() { // Kind of an overdo
 	var pre = '<li><p class="left">',
@@ -47,7 +47,6 @@ var TTSEngine = new function() {
 		]
 	};
 	
-	
 	this.speak = function(text) {
 		if(!ttsAvailable) {
 			return fail();
@@ -79,6 +78,7 @@ var TTSEngine = new function() {
 var PopUp = function(r) {
 	
 	PopUp._instance = this;
+
 	this.restaurants = r;
 	this.current = 0;
 	this.status = "Updating";
@@ -131,13 +131,13 @@ var PopUp = function(r) {
 	this.setup = function(r) {
 		if(r===undefined) {
 			console.log('R was null');
-			this.current = ( localStorage.current) ? parseInt(localStorage.current):0;
+			this.current = (localStorage.current) ? parseInt(localStorage.current):0;
 		} else {
 			console.log('R was ' + r);
 			this.current = r;
 		}
 		
-		this.setStatus(this.restaurants[this.current].getName());
+		this.elements.status.text(this.restaurants[this.current].getName());
 		if(localStorage.timestamp==undefined) {localStorage.timestamp = 1;}
 
 		if((new Date().getTime() - parseInt(localStorage.timestamp)) < 360000) { // Use cache
@@ -179,7 +179,7 @@ PopUp.getInstance = function() {
 	return PopUp._instance; 
 };
 
-var Restaurant = function(n,filterFunction) {
+var Restaurant = function(n, filterFunction) {
 	var name = n, dishes = [];
 	
 	this.filter = filterFunction; //arg $html, side effect set private dishes
@@ -188,12 +188,15 @@ var Restaurant = function(n,filterFunction) {
 	  return name;
 	};
 	this.setDishes = function(arr) {
-		dishes = arr;
+		if(arr.length) {
+			dishes = arr;
+		} else {
+			dishes = [new Dish("Nothing. Well, not for you anyway.")];
+		}
 		var names  = [];
 		for(var i in dishes) {
 			names.push(dishes[i].name);
 		}
-
 		localStorage.setItem("dis"+name, names.join(DELIMITER));
 		
 		};
@@ -220,7 +223,7 @@ var Harrys = new Restaurant('Harrys', function(data) {
 
 	var d = [];
 	rows.each(function(i) {
-		d.push(new Dish( clean_spaces($(this).text()) ));
+		d.push(new Dish($(this).text().trim()));
 	})
 	this.setDishes(d);
 	console.log('Ran harrys filter');
@@ -229,10 +232,12 @@ var SingChef = new Restaurant('SingKock', function(data) {
 	var rows = data.find('div.restaurant:contains(Richard)').parent();
 	rows = rows.find('.lunch-lista').children();
 
-	var d = [];
+	var d = [], t ="", c = "";
 	rows.each(function(i) {
-
-		d.push(new Dish( clean_spaces($(this).text()).toLocaleLowerCase() ));
+		t = $(this).text().trim().toLowerCase().substr(2);
+		c = t.substr(0,1).toUpperCase();
+		t = c + t.substr(1);
+		d.push(new Dish( t ));
 	})
 	this.setDishes(d);
 	console.log('Ran singkocks  filter');
