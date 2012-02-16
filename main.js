@@ -1,12 +1,12 @@
 "use strict";
-var 	DELIMITER = "|Z|",
-		TIMESTAMP = "timestamp",
-		remspc = RegExp(/[ ]{2,}|[¤]/ig);
+var DELIMITER = "|Z|",
+	TIMESTAMP = "timestamp",
+	remspc = new RegExp(/[ ]{2,}|[¤]/ig);
 
-var DishRowBuilder = function() { // Kind of an overdo
+var DishRowBuilder = function() { // Kind of an overdo. Its not even a real builder.
 	var pre = '<li><p class="left">',
-	post = '</p> <em><span>SHARE<span></em><div class="clear"/></li>\n',
-	temp = "", x = 0;
+		post = '</p> <em><span>SHARE<span></em><div class="clear"/></li>\n',
+		temp = "", x = 0;
 
 	this.add = function(dishes) {
 		if( typeof dishes !== "string") {
