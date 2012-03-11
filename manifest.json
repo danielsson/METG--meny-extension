@@ -1,8 +1,7 @@
 {
-  "name": "Meny",
+  "name": "Menu for MEG Övik",
   "version": "5.5",
-  "description": "",
-  "update_url": "http://dl.dropbox.com/u/1021696/ext.xml",
+  "description": "A small extension to check what's on the menu.",
   "browser_action": {
     "default_icon": "cake.png",
     "popup": "popup.htm"
